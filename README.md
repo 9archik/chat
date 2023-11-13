@@ -16,6 +16,7 @@
 
 <ul>
   <li>Express</li>
+      <li>Typescript</li>
   <li>TypeORM</li>
   <li>PostgreSQL</li>
   <li>SocketIO</li>
@@ -25,6 +26,7 @@
 
 <ul>
   <li>React</li>
+    <li>Typescript</li>
   <li>SocketIO</li>
   <li>Redux</li>
 </ul>
