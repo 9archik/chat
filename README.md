@@ -13,3 +13,18 @@
 <h3>Технологии</h3>
 
 <p>Backend</p>
+
+<ul>
+  <li>Express</li>
+  <li>TypeORM</li>
+  <li>PostgreSQL</li>
+  <li>SocketIO</li>
+</ul>
+
+<p>Frontend</p>
+
+<ul>
+  <li>React</li>
+  <li>SocketIO</li>
+  <li>Redux</li>
+</ul>
