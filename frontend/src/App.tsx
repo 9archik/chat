@@ -37,7 +37,6 @@ function App() {
 				}
 			})
 			.then((data) => {
-				console.log(data);
 				dispatch({ type: UserActionTypes.LOGIN, payload: data.userId });
 			})
 			.catch((error) => {

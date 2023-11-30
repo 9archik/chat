@@ -42,7 +42,6 @@ const ListRoom = () => {
 			.then((data) => {
 				if (data.error) {
 				} else {
-					console.log(data);
 					const rooms: IRoom[] = data;
 					setRooms(rooms);
 				}

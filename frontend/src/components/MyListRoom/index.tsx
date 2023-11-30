@@ -2,7 +2,8 @@ import { Dispatch, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { IActionLogin, IActionLogout, UserActionTypes } from '../../types/user';
+import { IActionChangeRole, IActionLogin, IActionLogout, UserActionTypes } from '../../types/user';
+import { error } from 'console';
 
 interface IRoom {
 	id: number;
@@ -19,7 +20,7 @@ const Host = process.env.REACT_APP_HOST;
 
 const MyListRoom = () => {
 	const [rooms, setRooms] = useState<IRoom[]>([]);
-	const dispatch: Dispatch<IActionLogout> = useDispatch();
+	const dispatch: Dispatch<IActionLogout | IActionChangeRole> = useDispatch();
 	const navigate = useNavigate();
 	useEffect(() => {
 		fetch(`${Host}/room/mylist`, {
@@ -30,11 +31,17 @@ const MyListRoom = () => {
 				'Content-Type': 'application/json',
 			},
 		})
-			.then((res) => res.json())
+			.then((res) => {
+				if (res.ok) {
+					return res.json();
+				} else {
+					throw new Error('error');
+				}
+			})
 			.then((data) => {
 				if (data.error) {
 				} else {
-					console.log(data);
+				
 					const rooms: IRoom[] = data;
 					setRooms(rooms);
 				}
@@ -64,6 +71,14 @@ const MyListRoom = () => {
 				}
 			})
 			.then((data) => {
+			    console.log('data', data)
+				dispatch({
+					type: UserActionTypes.CHANGEROLE,
+					payload: {
+						role: data?.role ? data?.role : 'member',
+						ban: data.bannedUntil,
+					},
+				});
 				navigate(`/room/${index}`);
 			})
 			.catch((error) => {

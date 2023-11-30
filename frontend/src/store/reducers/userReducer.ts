@@ -26,7 +26,7 @@ export const userReducer = (state = initialState, action: UserAction): IUserStat
 					user: {
 						...state.user,
 						role: action.payload.role ? action.payload.role : state.user.role,
-						ban: action.payload.ban ? action.payload.ban : state.user.ban,
+						ban: action.payload.ban !== undefined ? action.payload.ban : null,
 					},
 				};
 			}

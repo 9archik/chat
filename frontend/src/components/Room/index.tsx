@@ -68,7 +68,7 @@ const Room = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 
-	console.log(user);
+
 	const socketRef = useRef<null | Socket>(null);
 	useEffect(() => {
 		socketRef.current = io('http://localhost:5000', {
@@ -97,7 +97,7 @@ const Room = () => {
 			})
 			.then((data: IGetRoomQuery) => {
 				if (socketRef?.current && data) {
-					console.log(data);
+		
 					setRoomName(data.room?.name ? data.room?.name : '');
 					socketRef.current.emit('join', id);
 					dispatchRole({
@@ -115,7 +115,7 @@ const Room = () => {
 			});
 		if (socketRef?.current) {
 			socketRef.current.on('message_list', (data: IMessage[]) => {
-				console.log(data);
+		
 				setMessages(data);
 			});
 
@@ -140,7 +140,6 @@ const Room = () => {
 			});
 
 			socketRef.current.on('ban', (data) => {
-				console.log(data);
 				if (data?.userId === user?.id) {
 					if (data?.ban) {
 						dispatchRole({
